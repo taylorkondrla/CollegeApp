@@ -1,0 +1,39 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="C971_Oliver.MainPage">
+
+    <StackLayout Padding="20">
+        <Label Text="WGU Terms" FontSize="Large" HorizontalOptions="Center" Margin="0,0,0,10"/>
+
+        <!-- CollectionView to display term items -->
+        <CollectionView ItemsSource="{Binding Terms}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Margin="0,5">
+                        <!-- Entry for editing term title -->
+                        <Entry Text="{Binding Title}" Placeholder="Term Title" FontAttributes="Bold" FontSize="28" HorizontalTextAlignment="Center"
+                               TextChanged="TermTitleChanged"/>
+
+                        <StackLayout>
+                            <Label Text="Start Date" HorizontalOptions="Start" />
+                            <DatePicker Date="{Binding StartDate}" DateSelected="TermStartDateChanged" HorizontalOptions="FillAndExpand"/>
+                            <Label Text="End Date" HorizontalOptions="Start" Margin="0,10,0,0"/>
+                            <DatePicker Date="{Binding EndDate}" DateSelected="TermEndDateChanged" HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+
+                        <!-- HorizontalStackLayout to contain term actions -->
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                            <!-- Button to view term details -->
+                            <Button Text="View Term" Clicked="ViewTermClicked" CommandParameter="{Binding .}" Margin="0,0,10,0"/>
+                            <!-- Button to delete term -->
+                            <Button Text="Delete" Clicked="DeleteTermClicked" CommandParameter="{Binding .}"/>
+                        </StackLayout>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Add Term button -->
+        <Button Text="Add Term" Clicked="OnAddTermClicked" Margin="0,20,0,10"/>
+    </StackLayout>
+</ContentPage>
